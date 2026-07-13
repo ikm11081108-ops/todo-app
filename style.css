@@ -1,0 +1,341 @@
+/* ==========================================
+   全体の共通設定
+   ========================================== */
+
+* {
+  /* * は「すべての要素」を意味するセレクタ */
+  box-sizing: border-box;
+  /* 要素の幅・高さの計算方法を「paddingやborderを含めた合計」にする設定。
+     これがないとpaddingを付けたときに幅がずれて計算しにくくなります */
+  margin: 0;
+  padding: 0;
+  /* ブラウザが最初から持っている余白をリセットして、
+     自分で指定した余白だけが効くようにする */
+}
+
+body {
+  font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+  /* 日本語が綺麗に表示されるフォントを指定 */
+
+  /* ===== カフェ風の背景 =====
+     複数の背景を「重ねて」1つの背景にしています。
+     background-image にカンマ区切りで複数指定すると、
+     書いた順番で上から重なります(一番上に書いたものが最前面)。
+     1・2枚目 → コーヒーの輪染み風の模様(円形グラデーション)
+     3枚目    → 木目のような細いストライプ模様
+     4枚目    → ベースになるベージュのグラデーション */
+  background-image:
+    radial-gradient(circle at 12% 18%,
+      transparent 42px, rgba(101, 67, 33, 0.07) 43px,
+      rgba(101, 67, 33, 0.07) 47px, transparent 48px),
+    radial-gradient(circle at 88% 78%,
+      transparent 56px, rgba(101, 67, 33, 0.06) 57px,
+      rgba(101, 67, 33, 0.06) 62px, transparent 63px),
+    repeating-linear-gradient(100deg,
+      rgba(139, 111, 71, 0.05) 0px, rgba(139, 111, 71, 0.05) 2px,
+      transparent 2px, transparent 10px),
+    linear-gradient(135deg, #f5ead6 0%, #e8d5b7 100%);
+  /* 輪染み模様は「円の外側は透明→薄茶色の輪→また透明」という
+     色の変化を作ることで、ドーナツのような輪っかに見せています。
+     木目模様は同じ色を細い間隔で繰り返すことで、
+     ストライプ(縞模様)を作っています */
+
+  display: flex;
+  justify-content: center;
+  /* 画面の横方向の中央に子要素(.container)を寄せる */
+
+  padding: 40px 16px;
+  /* 上下40px、左右16pxの余白 */
+
+  min-height: 100vh;
+  /* 画面の高さいっぱいまで背景を広げる(コンテンツが少なくても
+     下に地の色が見えてしまわないようにするため) */
+}
+
+/* ==========================================
+   全体を囲む箱
+   ========================================== */
+
+.container {
+  background-color: rgba(255, 253, 248, 0.9);
+  /* 完全な白ではなく、少しクリーム寄りの半透明にすることで
+     背景の木目・輪染み模様がうっすら透けて見えるようにする。
+     文字の読みやすさを保つため、透明度は控えめ(0.9)にしている */
+
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  /* カードの背後にある背景模様をぼかして、
+     すりガラスのようなやわらかい質感を出す。
+     -webkit- が付いた方はSafariなど一部ブラウザ向けの互換記述 */
+
+  border-radius: 20px;
+  /* 角を大きめに丸くして、やさしい雰囲気にする */
+
+  box-shadow: 0 10px 30px rgba(139, 111, 71, 0.25);
+  /* 影の色を黒ではなく茶色系にすることで、
+     カフェらしい温かみのある立体感を出す */
+
+  padding: 32px 24px;
+  width: 100%;
+  max-width: 480px;
+  /* スマホ〜PCまで対応できるよう、最大幅を決めておく */
+}
+
+h1 {
+  text-align: center;
+  color: #6b4a2b;
+  /* コーヒーを思わせるブラウン系の文字色 */
+  margin-bottom: 24px;
+}
+
+/* ==========================================
+   入力エリア(テキストボックス + 追加ボタン)
+   ========================================== */
+
+.input-area {
+  display: flex;
+  flex-wrap: wrap;
+  /* 入力欄・プルダウン・ボタンが増えたので、
+     画面が狭いときは折り返せるようにしておく */
+  gap: 8px;
+  /* 要素同士のすき間 */
+  margin-bottom: 20px;
+}
+
+#todo-input {
+  flex: 1;
+  /* 残りのスペースを全部使って横幅いっぱいに広がる */
+  min-width: 160px;
+  /* 折り返したときに入力欄が極端に狭くならないようにする最小幅 */
+
+  padding: 10px 12px;
+  font-size: 16px;
+  color: #4a3826;
+  /* 濃いめのブラウンにして文字を読みやすくする */
+
+  background-color: #fbf6ee;
+  /* 入力欄も薄いクリーム色にして背景と馴染ませる */
+
+  border: 1px solid #d9c4a3;
+  border-radius: 10px;
+
+  /* ===== ここから textarea 化にともなう追加設定 ===== */
+  font-family: inherit;
+  /* 指定しないとtextareaはブラウザ標準のフォントになってしまうため、
+     bodyで指定した日本語フォントを引き継がせる */
+
+  resize: vertical;
+  /* ユーザーが手で高さだけ変更できるようにする(横幅は変えさせない) */
+
+  min-height: 44px;
+  /* 1行分でも押しやすい高さを確保しておく */
+
+  line-height: 1.5;
+  /* 複数行になったときに行間を読みやすくする */
+}
+
+#todo-input:focus {
+  /* 入力欄をクリックした(フォーカスした)ときのスタイル */
+  outline: none;
+  border-color: #c8a06a;
+  /* カフェらしいキャラメル系の色に */
+}
+
+#add-button {
+  padding: 10px 18px;
+  font-size: 16px;
+  color: #ffffff;
+  background-color: #b98a52;
+  /* カフェオレのようなブラウン系の色 */
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  /* マウスを乗せたときに「押せます」という指マークにする */
+}
+
+#add-button:hover {
+  background-color: #a1723e;
+  /* マウスを乗せたときに少し濃い色にして反応をわかりやすく */
+}
+
+/* ==========================================
+   期間を選ぶプルダウン
+   ========================================== */
+
+#period-select {
+  padding: 10px 12px;
+  font-size: 16px;
+  color: #4a3826;
+  /* 入力欄と同じ濃いブラウンで文字を読みやすくする */
+
+  background-color: #fbf6ee;
+  /* 入力欄と同じクリーム色にして統一感を出す */
+
+  border: 1px solid #d9c4a3;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+#period-select:focus {
+  outline: none;
+  border-color: #c8a06a;
+  /* 入力欄のフォーカス色と揃える */
+}
+
+/* ==========================================
+   期間タブ(今日 / 1週間 / 1か月 / 1年)
+   ========================================== */
+
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  /* 画面が狭いときはタブを折り返して、はみ出さないようにする */
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.tab-button {
+  flex: 1;
+  /* 4つのタブが均等に横幅を分け合う */
+  min-width: 70px;
+  /* これより狭くなったら折り返す、という目安の最小幅 */
+
+  padding: 8px 10px;
+  font-size: 14px;
+  color: #8a6d4b;
+  /* 未選択タブは少し薄めのブラウン */
+
+  background-color: #f5ead6;
+  /* 背景と同系統の薄いベージュ */
+
+  border: 1px solid #e3d3b8;
+  border-radius: 20px;
+  /* 大きく丸めてピル(錠剤)のような形にする */
+
+  cursor: pointer;
+  transition: background-color 0.15s, color 0.15s;
+  /* 色の変化を一瞬でなく、少しなめらかにする */
+}
+
+.tab-button:hover {
+  background-color: #ecdcbd;
+}
+
+.tab-button.active {
+  /* JavaScriptで選択中のタブに付けられるクラス */
+  background-color: #b98a52;
+  /* 追加ボタンと同じ濃いブラウンにして「選ばれている」ことを強調 */
+  color: #ffffff;
+  border-color: #b98a52;
+}
+
+/* ==========================================
+   タスク一覧
+   ========================================== */
+
+#todo-list {
+  list-style: none;
+  /* リストの先頭につく黒い点(・)を消す */
+}
+
+.todo-item {
+  display: flex;
+  align-items: flex-start;
+  /* 複数行のタスクがあると高さが不揃いになるため、
+     中央揃えではなく上揃えにして自然に見えるようにする */
+  justify-content: space-between;
+  /* タスク名を左、削除ボタンを右に配置 */
+
+  padding: 12px 14px;
+  margin-bottom: 8px;
+  /* カード風に1件ずつ独立させるので、項目同士のすき間をあける */
+
+  background-color: #fbf6ee;
+  /* 薄いクリーム色でカードっぽく見せる */
+
+  border-radius: 10px;
+  /* 角を丸くして全体のやさしい雰囲気に合わせる */
+}
+
+.todo-item:last-child {
+  margin-bottom: 0;
+  /* 一番下の項目には余分なすき間をつけない */
+}
+
+.todo-text {
+  flex: 1;
+  cursor: pointer;
+  /* クリックして完了/未完了を切り替えられることを示す */
+  word-break: break-all;
+  /* 長い文字列でも横にはみ出さず折り返す */
+
+  white-space: pre-wrap;
+  /* 保存されているタスクの文字列に含まれる改行(\n)や連続スペースを
+     そのまま画面表示に反映させる設定。
+     これがないと、textareaで改行して入力しても
+     画面上では1行につながって表示されてしまう */
+
+  line-height: 1.5;
+  /* 複数行になったときに読みやすいよう行間を広げる */
+
+  color: #4a3826;
+  /* 濃いブラウンにして、クリーム色の背景でも読みやすくする */
+}
+
+.todo-item.completed .todo-text {
+  /* JavaScriptで "completed" クラスが付いたタスクの見た目 */
+  text-decoration: line-through;
+  /* 取り消し線 */
+  color: #b3a290;
+  /* 完了タスクはやわらかいベージュ系のグレーにして目立たなくする */
+}
+
+.delete-button {
+  margin-left: 12px;
+  padding: 6px 10px;
+  font-size: 14px;
+  color: #ffffff;
+  background-color: #d99a8a;
+  /* 赤すぎない、カフェの雰囲気に合うテラコッタ系の色 */
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.delete-button:hover {
+  background-color: #c47c6a;
+  /* ホバー時は少し濃く */
+}
+
+/* ==========================================
+   スマートフォン向けの調整
+   ========================================== */
+/* 画面の横幅が480px以下(だいたいスマホのサイズ)のときだけ
+   このブロックの中のスタイルが適用されます */
+
+@media (max-width: 480px) {
+
+  .container {
+    padding: 20px 16px;
+    /* カードの余白を少し狭くして、画面を有効に使う */
+  }
+
+  h1 {
+    font-size: 22px;
+    /* タイトルの文字を少し小さくする */
+  }
+
+  #todo-input,
+  #period-select,
+  #add-button {
+    font-size: 15px;
+    /* スマホでも読みやすいが窮屈にならない大きさに調整 */
+  }
+
+  .tab-button {
+    min-width: 60px;
+    font-size: 13px;
+    padding: 8px 6px;
+    /* タブが4つ並んでも、狭い画面に収まりやすくする */
+  }
+}

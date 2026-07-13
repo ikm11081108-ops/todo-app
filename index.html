@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<!-- ↑ このファイルがHTML5であることを宣言するおまじないです -->
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <!-- 文字コードをUTF-8にする設定。これがないと日本語が文字化けします -->
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- スマホなどの画面サイズに合わせて表示を調整するための設定 -->
+
+  <title>ToDoリスト</title>
+  <!-- ブラウザのタブに表示されるタイトル -->
+
+  <!-- CSS(見た目のデザイン)ファイルを読み込む -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ページ全体を囲む箱(コンテナ)。CSSで中央寄せなどに使う -->
+  <div class="container">
+
+    <h1>ToDoリスト</h1>
+    <!-- ページの大見出し -->
+
+    <!-- タスクを入力するエリア -->
+    <div class="input-area">
+      <textarea id="todo-input" placeholder="やることを入力してください(Shift+Enterで改行)" rows="1"></textarea>
+      <!-- input から textarea に変更し、複数行の入力に対応した。
+           rows="1" は初期の高さの目安(1行分)。
+           id="todo-input" はJavaScriptからこの入力欄を見つけるための目印 -->
+
+      <!-- 期間を選ぶプルダウン。タスクと一緒に「いつの期間のタスクか」を保存する -->
+      <select id="period-select">
+        <option value="today">今日</option>
+        <option value="week">1週間</option>
+        <option value="month">1か月</option>
+        <option value="year">1年</option>
+      </select>
+      <!-- value(値)は英語にしておき、画面に見せる文字だけ日本語にしています。
+           JavaScript側ではこのvalueを使って処理を行います -->
+
+      <button id="add-button">追加</button>
+      <!-- id="add-button" はJavaScriptからこのボタンを見つけるための目印 -->
+    </div>
+
+    <!-- 期間を切り替えるタブ。クリックすると、その期間のタスクだけ表示される -->
+    <div class="tabs" id="tabs">
+      <button class="tab-button active" data-period="today">今日</button>
+      <button class="tab-button" data-period="week">1週間</button>
+      <button class="tab-button" data-period="month">1か月</button>
+      <button class="tab-button" data-period="year">1年</button>
+    </div>
+    <!-- data-period="today" のような「data-〇〇」属性は、
+         HTMLに自由な目印(データ)を持たせられる仕組みです。
+         JavaScriptから button.dataset.period という形で読み取れます。
+         最初は「今日」タブに active クラスをつけて、選択中の見た目にしています -->
+
+    <!-- タスクの一覧を表示するリスト -->
+    <ul id="todo-list">
+      <!-- ここにJavaScriptがタスクを追加していきます(今は空っぽ) -->
+    </ul>
+
+  </div>
+
+  <!-- JavaScript(動きをつけるファイル)を読み込む -->
+  <!-- body の一番下に書くことで、HTMLを先に読み込んでからJSを動かせる -->
+  <script src="script.js"></script>
+</body>
+</html>
