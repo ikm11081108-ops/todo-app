@@ -24,9 +24,10 @@
 
     <!-- タスクを入力するエリア -->
     <div class="input-area">
-      <textarea id="todo-input" placeholder="やることを入力してください(Shift+Enterで改行)" rows="1"></textarea>
+      <textarea id="todo-input" placeholder="やることを入力してください(Enterで改行できます)" rows="2"></textarea>
       <!-- input から textarea に変更し、複数行の入力に対応した。
-           rows="1" は初期の高さの目安(1行分)。
+           rows="2" は初期の高さの目安(2行分)。CSSのmin-heightと合わせて
+           最初から少し余裕のある高さで表示されるようにしている。
            id="todo-input" はJavaScriptからこの入力欄を見つけるための目印 -->
 
       <!-- 期間を選ぶプルダウン。タスクと一緒に「いつの期間のタスクか」を保存する -->

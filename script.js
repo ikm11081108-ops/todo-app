@@ -215,24 +215,12 @@ function switchTab(period) {
 // 「追加」ボタンをクリックしたときにaddTodoを実行
 addButton.addEventListener("click", addTodo);
 
-// 入力欄でのキー操作を制御する
-// ・Enterキーだけ  → タスクを追加する(改行はしない)
-// ・Shift + Enter → 改行する(追加はしない)
-todoInput.addEventListener("keydown", function (event) {
-  if (event.key === "Enter" && !event.shiftKey) {
-    // event.shiftKey は「Shiftキーが同時に押されているか」を表す値(true/false)。
-    // Enterが押され、かつShiftが押されて"いない"ときだけ、この中に入る。
-
-    event.preventDefault();
-    // preventDefault() は「本来ブラウザが行うはずだった動作」を止める命令。
-    // textareaのEnterキーは本来「改行を入力する」動作をするが、
-    // それを止めることで、改行されずに次のaddTodo()だけが実行される。
-
-    addTodo();
-  }
-  // Shift + Enter のときはこのif文に入らないため、
-  // 何もせずブラウザ本来の動き(=改行)がそのまま行われる。
-});
+// ※ 以前はここに「Enterキーでタスクを追加する」処理があったが、
+//   スマホ・パソコンのどちらでもEnterキーは「改行」専用にしたいため削除した。
+//   textarea はもともとEnterキーで改行するのが標準の動き。
+//   何もイベントを登録しなければ、そのブラウザ標準の改行動作が
+//   そのまま働くので、あえてJavaScriptで制御する必要がない。
+//   タスクの追加は addButton の click イベント(上の1行)だけが行う。
 
 // 各タブボタンにクリックイベントを登録する
 // tabButtons は複数の要素なので、forEach で1つずつ登録する
