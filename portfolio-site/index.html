@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Makiko Sano | AIを活用したWeb制作・ライティング</title>
+  <meta name="description" content="AIを活用したWeb制作・ライティングを行うMakiko Sanoのポートフォリオサイトです。ホームページ制作、SEO記事作成などの実績を掲載しています。">
+
+  <!-- スタイルシートの読み込み -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Googleフォント（見出し・本文を読みやすくするため） -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- ========== ヘッダー（サイト共通のナビゲーション） ========== -->
+  <header class="header" id="header">
+    <div class="header__inner">
+      <a href="#top" class="header__logo">Makiko Sano</a>
+
+      <!-- スマホ用メニューボタン -->
+      <button class="header__toggle" id="menuToggle" aria-label="メニューを開く" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <nav class="header__nav" id="headerNav">
+        <ul class="header__list">
+          <li><a href="#about">自己紹介</a></li>
+          <li><a href="#services">対応できる仕事</a></li>
+          <li><a href="#works">制作実績</a></li>
+          <li><a href="#tools">使用ツール</a></li>
+          <li><a href="#contact">お問い合わせ</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- ========== 1. トップ画面（背景画像＋暗めオーバーレイのヒーロー） ========== -->
+    <section class="hero" id="top">
+      <!-- 背景画像の上に重ねる暗めオーバーレイ（黒50%）。文字を読みやすくするため -->
+      <div class="hero__overlay"></div>
+
+      <div class="hero__inner">
+        <h1 class="hero__name">SANO TEXT &amp; DESIGN</h1>
+        <p class="hero__title">
+          <span class="hero__title-line1">ホームページ制作</span>
+          <span class="hero__title-line2">AI活用・SEOライティング</span>
+        </p>
+        <p class="hero__catch">あなたの想いを、伝わる形に。</p>
+        <p class="hero__desc">「伝わるホームページと、読まれる文章を。」</p>
+        <div class="hero__buttons">
+          <a href="#works" class="btn btn--hero-primary">制作実績を見る</a>
+          <a href="#contact" class="btn btn--hero-outline">お問い合わせ</a>
+        </div>
+      </div>
+
+      <!-- スクロール誘導アイコン：ヒーロー下部で次のセクションへの遷移を促す -->
+      <a href="#about" class="hero__scroll-cue" aria-label="下にスクロールして次のセクションへ">↓</a>
+    </section>
+
+    <!-- ========== 2. 自己紹介 ========== -->
+    <section class="section" id="about">
+      <div class="section__inner">
+        <h2 class="section__title">自己紹介</h2>
+        <p class="section__lead">About Me</p>
+
+        <div class="about">
+          <p class="about__text">
+            はじめまして。<br>
+            <span class="about__brand">SANO TEXT &amp; DESIGN</span> の Makiko Sanoです。
+          </p>
+          <p class="about__text">
+            Claude CodeやChatGPTなどのAIを活用し、<br>
+            ホームページ制作やSEOライティングを行っています。
+          </p>
+          <p class="about__text">
+            お客様の想いや目的を丁寧に伺い、<br>
+            「伝わるデザイン」と「読みやすい文章」を大切に制作しています。
+          </p>
+          <p class="about__text">
+            一つひとつのご依頼に誠実に向き合い、<br>
+            安心してご相談いただけるパートナーを目指しています。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== 3. 対応できる仕事 ========== -->
+    <section class="section section--gray" id="services">
+      <div class="section__inner">
+        <h2 class="section__title">対応できる仕事</h2>
+        <p class="section__lead">Services</p>
+
+        <div class="services">
+          <div class="service-card">
+            <div class="service-card__icon">🖥️</div>
+            <h3 class="service-card__title">ホームページ制作</h3>
+            <p class="service-card__desc">お店やサービス紹介など、目的に合わせたホームページを制作します。</p>
+          </div>
+
+          <div class="service-card">
+            <div class="service-card__icon">📄</div>
+            <h3 class="service-card__title">ランディングページ制作</h3>
+            <p class="service-card__desc">商品やサービスの魅力が伝わる、1ページ完結のLPを制作します。</p>
+          </div>
+
+          <div class="service-card">
+            <div class="service-card__icon">💻</div>
+            <h3 class="service-card__title">HTML・CSS・JavaScript制作</h3>
+            <p class="service-card__desc">コーディングによる、動きのあるWebページ制作に対応します。</p>
+          </div>
+
+          <div class="service-card">
+            <div class="service-card__icon">🤖</div>
+            <h3 class="service-card__title">AIを活用したWeb制作</h3>
+            <p class="service-card__desc">Claude CodeやChatGPTを活用し、効率よく高品質な制作を行います。</p>
+          </div>
+
+          <div class="service-card">
+            <div class="service-card__icon">🔍</div>
+            <h3 class="service-card__title">SEO記事作成</h3>
+            <p class="service-card__desc">検索結果で見つけてもらいやすい、SEOを意識した記事を作成します。</p>
+          </div>
+
+          <div class="service-card">
+            <div class="service-card__icon">✏️</div>
+            <h3 class="service-card__title">ブログ・note記事作成</h3>
+            <p class="service-card__desc">読みやすく分かりやすい、ブログやnote向けの記事を作成します。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== 4. 制作実績 ========== -->
+    <section class="section" id="works">
+      <div class="section__inner">
+        <h2 class="section__title">制作実績</h2>
+        <p class="section__lead">Works</p>
+
+        <div class="works">
+          <!-- 実績カード1：ToDoアプリ（カード全体をクリックするとToDoアプリのページへ移動） -->
+          <a href="../index.html" class="work-card">
+            <!-- カード上部の画像。ホバー時に拡大するアニメーションを付与 -->
+            <div class="work-card__thumb">
+              <img src="images/todo.png" alt="ToDoアプリの画面キャプチャ" class="work-card__img">
+            </div>
+            <div class="work-card__body">
+              <h3 class="work-card__title">ToDoアプリ</h3>
+              <p class="work-card__desc">
+                HTML・CSS・JavaScriptで制作した、タスク管理アプリです。
+                スマートフォン表示にも対応しています。
+              </p>
+              <ul class="work-card__tags">
+                <li>HTML</li>
+                <li>CSS</li>
+                <li>JavaScript</li>
+              </ul>
+              <!-- サイトを見るボタン（見た目のみ。クリック判定はカード全体のリンクが担う） -->
+              <span class="work-card__btn">サイトを見る<span class="work-card__btn-arrow">→</span></span>
+            </div>
+          </a>
+<!-- 制作実績2：Café Bloom -->
+<a href="https://ikm11081108-ops.github.io/cafe-bloom/" class="work-card" target="_blank">
+  <div class="work-card__thumb">
+    <img src="images/cafe-bloom.png" alt="Café Bloomの画面キャプチャ" class="work-card__img">
+  </div>
+
+  <div class="work-card__body">
+    <h3 class="work-card__title">Café Bloom</h3>
+
+    <p class="work-card__desc">
+      HTML・CSS・JavaScriptを用いて制作した架空のカフェ紹介サイトです。<br>
+      レスポンシブ対応を行い、落ち着いたデザインを意識しました。
+    </p>
+
+    <ul class="work-card__tags">
+      <li>HTML</li>
+      <li>CSS</li>
+      <li>JavaScript</li>
+      <li>GitHub Pages</li>
+    </ul>
+
+    <span class="work-card__btn">
+      サイトを見る
+      <span class="work-card__btn-arrow">→</span>
+    </span>
+  </div>
+</a>
+ 
+
+
+
+<!-- 実績カード2：ポートフォリオサイト -->
+<a href="index.html" class="work-card">         
+          
+            <!-- カード上部の画像。ホバー時に拡大するアニメーションを付与 -->
+            <div class="work-card__thumb">
+              <img src="images/portfolio.png" alt="ポートフォリオサイトの画面キャプチャ" class="work-card__img">
+            </div>
+            <div class="work-card__body">
+              <h3 class="work-card__title">ポートフォリオサイト</h3>
+              <p class="work-card__desc">
+                現在ご覧いただいているこのサイトです。
+                AIを活用しながら、自身で構成からコーディングまで行いました。
+              </p>
+              <ul class="work-card__tags">
+                <li>HTML</li>
+                <li>CSS</li>
+                <li>JavaScript</li>
+              </ul>
+              <!-- サイトを見るボタン（見た目のみ。クリック判定はカード全体のリンクが担う） -->
+              <span class="work-card__btn">サイトを見る<span class="work-card__btn-arrow">→</span></span>
+            </div>
+          </a>
+
+          <!-- 実績カード3：制作中の案件（リンクなし） -->
+          <div class="work-card work-card--soon">
+            <div class="work-card__thumb work-card__thumb--soon">
+              <span>現在制作中</span>
+            </div>
+            <div class="work-card__body">
+              <h3 class="work-card__title">AIチャットアプリ（制作中）</h3>
+              <p class="work-card__desc">
+                AIチャットアプリ、公開予定です。
+                随時更新していきます。
+              </p>
+              <ul class="work-card__tags">
+                <li>準備中</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== 5. 使用できるツール ========== -->
+    <section class="section section--gray" id="tools">
+      <div class="section__inner">
+        <h2 class="section__title">使用できるツール</h2>
+        <p class="section__lead">Tools</p>
+
+        <div class="tools">
+          <div class="tool-item">
+            <p class="tool-item__name">Claude Code</p>
+          </div>
+          <div class="tool-item">
+            <p class="tool-item__name">ChatGPT</p>
+          </div>
+          <div class="tool-item">
+            <p class="tool-item__name">HTML</p>
+          </div>
+          <div class="tool-item">
+            <p class="tool-item__name">CSS</p>
+          </div>
+          <div class="tool-item">
+            <p class="tool-item__name">JavaScript</p>
+          </div>
+          <div class="tool-item">
+            <p class="tool-item__name">GitHub</p>
+          </div>
+          <div class="tool-item">
+            <p class="tool-item__name">GitHub Pages</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== 6. お問い合わせ案内 ========== -->
+    <section class="section" id="contact">
+      <div class="section__inner">
+        <h2 class="section__title">お問い合わせ</h2>
+        <p class="section__lead">Contact</p>
+
+        <div class="contact">
+          <p class="contact__text">
+            ご依頼・ご質問などございましたら、クラウドワークスのメッセージより
+            お気軽にお問い合わせください。<br>
+            初心者ではありますが、誠実に対応させていただきます。
+          </p>
+
+          <a href="https://crowdworks.jp/" target="_blank" rel="noopener noreferrer" class="btn btn--primary btn--large">
+            クラウドワークスでメッセージを送る
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ========== フッター ========== -->
+  <footer class="footer">
+    <p>&copy; 2026 Makiko Sano. All Rights Reserved.</p>
+  </footer>
+
+  <!-- トップに戻るボタン -->
+  <button id="pageTopBtn" class="page-top" aria-label="ページトップへ戻る">↑</button>
+
+  <!-- JavaScriptファイルの読み込み -->
+  <script src="script.js"></script>
+</body>
+</html>

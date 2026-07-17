@@ -1,0 +1,735 @@
+/* ==========================================================
+   共通設定
+   ========================================================== */
+
+:root {
+  /* --- カラー：白を基本に、青と緑をアクセントとして使用 --- */
+  --color-bg: #ffffff;
+  --color-bg-gray: #f6f9fb;
+  --color-text: #333333;
+  --color-text-light: #666666;
+  --color-primary: #2f80c5;   /* メインカラー：青 */
+  --color-accent: #2fa87e;    /* アクセントカラー：緑 */
+  --color-border: #e3e8ec;
+  --color-white: #ffffff;
+
+  /* --- ヒーローセクション専用カラー：ネイビー・ターコイズブルー（高級感を演出） --- */
+  --color-hero-navy: #16264a;
+  --color-hero-turquoise: #1aa9a0;
+
+  /* --- 余白・角丸 --- */
+  --radius: 12px;
+  --shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+}
+
+/* 全要素のデフォルト余白をリセットし、boxサイズの計算を統一 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth; /* アンカーリンクをなめらかにスクロール */
+}
+
+body {
+  font-family: "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif;
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  line-height: 1.8;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
+/* セクション共通の横幅・余白（中央寄せ用コンテナ） */
+.section__inner,
+.header__inner {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ==========================================================
+   ボタン
+   ========================================================== */
+
+.btn {
+  display: inline-block;
+  padding: 14px 32px;
+  border-radius: 999px;
+  font-weight: 700;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.btn:hover {
+  opacity: 0.85;
+  transform: translateY(-2px);
+}
+
+.btn--primary {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+}
+
+.btn--outline {
+  background-color: transparent;
+  color: var(--color-primary);
+  border: 2px solid var(--color-primary);
+}
+
+.btn--large {
+  padding: 16px 40px;
+  font-size: 1.05rem;
+}
+
+/* ==========================================================
+   ヘッダー
+   ========================================================== */
+
+/* 初期状態（ヒーロー＝背景画像の上）はガラス風の半透明ナビ。
+   スクロールすると is-scrolled クラスが付き、白背景へ自然に変化する */
+.header {
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+  z-index: 100;
+  transition: background-color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+.header.is-scrolled {
+  background-color: rgba(255, 255, 255, 0.92);
+  border-bottom-color: var(--color-border);
+  box-shadow: 0 2px 12px rgba(16, 24, 43, 0.06);
+}
+
+.header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 68px;
+}
+
+.header__logo {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 0.02em;
+  transition: color 0.4s ease;
+}
+
+.header.is-scrolled .header__logo {
+  color: var(--color-primary);
+}
+
+.header__list {
+  display: flex;
+  gap: 32px;
+}
+
+.header__list a {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.92);
+  transition: color 0.3s ease;
+}
+
+.header__list a:hover {
+  color: var(--color-hero-turquoise);
+}
+
+.header.is-scrolled .header__list a {
+  color: var(--color-text);
+}
+
+.header.is-scrolled .header__list a:hover {
+  color: var(--color-primary);
+}
+
+/* スマホ用メニューボタン（PCでは非表示） */
+.header__toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 32px;
+  height: 32px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.header__toggle span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background-color: #ffffff;
+  transition: background-color 0.4s ease, transform 0.2s ease, opacity 0.2s ease;
+}
+
+.header.is-scrolled .header__toggle span {
+  background-color: var(--color-text);
+}
+
+/* ==========================================================
+   トップ画面（ヒーローセクション）
+   背景画像（images/beach.jpg）＋暗めオーバーレイ＋中央寄せの文字組み
+   ========================================================== */
+
+.hero {
+  position: relative;
+  min-height: 92vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+
+  /* 背景画像を画面いっぱいに敷く */
+  background-image: url("images/beach.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* 背景画像の上に重ねる暗めオーバーレイ（黒50%）。文字を読みやすくするための層 */
+.hero__overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* オーバーレイより手前（前面）に文字を配置 */
+.hero__inner {
+  position: relative;
+  z-index: 1;
+  max-width: 720px;
+  padding: 0 24px;
+}
+
+/* ブランド名：ヒーロー内で最も目立たせる要素。画面幅が狭い時だけ改行を許可する */
+.hero__name {
+  font-size: clamp(2.6rem, 6.5vw, 4.2rem);
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  margin-bottom: 18px;
+  color: #ffffff;
+  text-shadow: 0 4px 28px rgba(0, 0, 0, 0.45);
+  white-space: nowrap;
+}
+
+/* サブタイトルは2行構成。1行目をやや大きく、2行目をやや小さくして間隔を詰める */
+.hero__title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 28px;
+}
+
+.hero__title-line1,
+.hero__title-line2 {
+  color: var(--color-hero-turquoise);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  line-height: 1.3;
+}
+
+.hero__title-line1 {
+  font-size: clamp(1.1rem, 2.6vw, 1.4rem);
+}
+
+.hero__title-line2 {
+  font-size: clamp(0.9rem, 2vw, 1.15rem);
+  font-weight: 500;
+}
+
+/* 新しく追加したメインのキャッチコピー */
+.hero__catch {
+  font-size: clamp(1.3rem, 3vw, 1.7rem);
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: #ffffff;
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.35);
+}
+
+/* 既存のキャッチコピー（補足として少し控えめに） */
+.hero__desc {
+  max-width: 520px;
+  margin: 0 auto 40px;
+  font-size: clamp(1rem, 2.2vw, 1.2rem);
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.hero__buttons {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+/* ヒーロー専用ボタン：ネイビー・ターコイズブルーを基調にした高級感のある配色
+   ホバー時にふわっと浮き上がるアニメーションを付与 */
+.btn--hero-primary,
+.btn--hero-outline {
+  letter-spacing: 0.03em;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.btn--hero-primary {
+  background-color: var(--color-hero-turquoise);
+  color: #ffffff;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.2);
+}
+
+.btn--hero-primary:hover {
+  background-color: #22c2b7;
+  transform: translateY(-5px);
+  box-shadow: 0 18px 32px rgba(0, 0, 0, 0.3);
+  opacity: 1;
+}
+
+.btn--hero-outline {
+  background-color: rgba(255, 255, 255, 0.06);
+  color: #ffffff;
+  border: 1.5px solid rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(6px);
+}
+
+.btn--hero-outline:hover {
+  background-color: rgba(255, 255, 255, 0.16);
+  border-color: #ffffff;
+  transform: translateY(-5px);
+  box-shadow: 0 18px 32px rgba(0, 0, 0, 0.22);
+  opacity: 1;
+}
+
+/* スクロール誘導アイコン：ヒーロー下部中央でゆっくり上下に揺れる */
+.hero__scroll-cue {
+  position: absolute;
+  left: 50%;
+  bottom: 28px;
+  transform: translateX(-50%);
+  z-index: 1;
+  font-size: 1.4rem;
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.85);
+  text-decoration: none;
+  animation: heroScrollCue 2.4s ease-in-out infinite;
+}
+
+.hero__scroll-cue:hover {
+  color: #ffffff;
+}
+
+@keyframes heroScrollCue {
+  0%, 100% { transform: translate(-50%, 0); opacity: 0.7; }
+  50% { transform: translate(-50%, 8px); opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__scroll-cue { animation: none; }
+}
+
+/* ==========================================================
+   セクション共通
+   ========================================================== */
+
+.section {
+  padding: 96px 0;
+}
+
+.section--gray {
+  background-color: var(--color-bg-gray);
+}
+
+.section__title {
+  font-size: clamp(1.6rem, 3.5vw, 2rem);
+  font-weight: 700;
+  text-align: center;
+}
+
+.section__lead {
+  text-align: center;
+  color: var(--color-accent);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  margin-bottom: 48px;
+  font-size: 0.9rem;
+}
+
+/* ==========================================================
+   自己紹介
+   ========================================================== */
+
+.about {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.about__text {
+  margin-bottom: 28px;
+  font-size: 1.02rem;
+  line-height: 2;
+  letter-spacing: 0.02em;
+  color: var(--color-text-light);
+}
+
+.about__text:last-child {
+  margin-bottom: 0;
+}
+
+/* 自己紹介内でブランド名を強調 */
+.about__brand {
+  color: var(--color-primary);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+/* ==========================================================
+   対応できる仕事（カード）
+   ========================================================== */
+
+.services {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.service-card {
+  background-color: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 32px 24px;
+  text-align: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.service-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow);
+}
+
+.service-card__icon {
+  font-size: 2rem;
+  margin-bottom: 16px;
+}
+
+.service-card__title {
+  font-size: 1.05rem;
+  margin-bottom: 10px;
+}
+
+.service-card__desc {
+  font-size: 0.9rem;
+  color: var(--color-text-light);
+}
+
+/* ==========================================================
+   制作実績（カード）
+   ========================================================== */
+
+.works {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+.work-card {
+  display: flex;
+  flex-direction: column; /* 画像・本文・ボタンを縦に並べ、高さを揃える */
+  background-color: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  text-decoration: none; /* カード自体がリンクのため、下線を消す */
+  color: inherit; /* リンクの青色を打ち消し、通常の文字色を継承する */
+  /* 高級感のある滑らかな浮き上がりアニメーション */
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease;
+}
+
+.work-card:hover {
+  /* カード全体が少し浮き上がる */
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(16, 24, 43, 0.14);
+}
+
+.work-card__thumb {
+  height: 220px;
+  overflow: hidden; /* 画像の拡大がカードからはみ出さないようにする */
+}
+
+.work-card__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* カードにホバーすると画像だけ少し拡大させる */
+.work-card:hover .work-card__img {
+  transform: scale(1.06);
+}
+
+.work-card__thumb--soon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-white);
+  font-weight: 700;
+  font-size: 1.1rem;
+  letter-spacing: 0.04em;
+  background: linear-gradient(135deg, #b7c0c7, #d4dbe0);
+}
+
+.work-card--soon {
+  opacity: 0.85;
+}
+
+.work-card__body {
+  display: flex;
+  flex-direction: column;
+  flex: 1; /* 本文の高さをカード内で伸縮させ、ボタンを下端に揃える */
+  padding: 24px;
+}
+
+.work-card__title {
+  font-size: 1.05rem;
+  margin-bottom: 10px;
+}
+
+.work-card__desc {
+  font-size: 0.9rem;
+  color: var(--color-text-light);
+  margin-bottom: 16px;
+}
+
+.work-card__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.work-card__tags li {
+  font-size: 0.75rem;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background-color: var(--color-bg-gray);
+  color: var(--color-primary);
+  font-weight: 500;
+}
+
+/* 「サイトを見る」ボタン。カード下部に固定表示する */
+.work-card__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  align-self: flex-start;
+  margin-top: auto; /* 本文の量に関わらずカード下端に揃える */
+  padding: 10px 24px;
+  border-radius: 999px;
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  font-size: 0.85rem;
+  font-weight: 700;
+  transition: background-color 0.25s ease, transform 0.25s ease;
+}
+
+/* ボタンにマウスが乗った時のホバーアニメーション */
+.work-card__btn:hover {
+  background-color: var(--color-accent);
+  transform: translateY(-3px);
+}
+
+.work-card__btn-arrow {
+  transition: transform 0.25s ease;
+}
+
+/* ホバー時に矢印だけ少し右へ動かし、遷移感を演出する */
+.work-card__btn:hover .work-card__btn-arrow {
+  transform: translateX(4px);
+}
+
+/* ==========================================================
+   使用できるツール
+   ========================================================== */
+
+.tools {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+}
+
+.tool-item {
+  background-color: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  padding: 12px 28px;
+  font-weight: 500;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.tool-item:hover {
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+/* ==========================================================
+   お問い合わせ
+   ========================================================== */
+
+.contact {
+  max-width: 560px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.contact__text {
+  color: var(--color-text-light);
+  margin-bottom: 32px;
+}
+
+/* ==========================================================
+   フッター
+   ========================================================== */
+
+.footer {
+  text-align: center;
+  padding: 32px 24px;
+  color: var(--color-text-light);
+  font-size: 0.85rem;
+  border-top: 1px solid var(--color-border);
+}
+
+/* ==========================================================
+   トップに戻るボタン
+   ========================================================== */
+
+.page-top {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: none;
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  font-size: 1.2rem;
+  cursor: pointer;
+  box-shadow: var(--shadow);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+  z-index: 90;
+}
+
+/* JavaScript側で is-visible クラスを付け外しして表示を切り替える */
+.page-top.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* ==========================================================
+   レスポンシブ対応（タブレット・スマートフォン）
+   ========================================================== */
+
+@media (max-width: 900px) {
+  .services,
+  .works {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .header__toggle {
+    display: flex;
+  }
+
+  /* スマホ用メニュー：初期状態は非表示にしておく */
+  .header__nav {
+    position: absolute;
+    top: 68px;
+    left: 0;
+    width: 100%;
+    background-color: var(--color-white);
+    border-bottom: 1px solid var(--color-border);
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+
+  /* JavaScript側で is-open クラスを付けるとメニューが開く */
+  .header__nav.is-open {
+    max-height: 400px;
+  }
+
+  .header__list {
+    flex-direction: column;
+    gap: 0;
+    padding: 8px 24px 16px;
+  }
+
+  .header__list li {
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .header__list a {
+    display: block;
+    padding: 14px 0;
+  }
+
+  .hero {
+    min-height: 80vh;
+    padding: 100px 20px 72px;
+  }
+
+  /* 画面幅が狭い場合のみ、ブランド名の改行を許可する */
+  .hero__name {
+    white-space: normal;
+    font-size: clamp(1.8rem, 7vw, 2.4rem);
+  }
+
+
+  .section {
+    padding: 64px 0;
+  }
+
+  .services,
+  .works {
+    grid-template-columns: 1fr;
+  }
+
+  .hero__buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .btn {
+    width: 100%;
+    max-width: 280px;
+    text-align: center;
+  }
+}
